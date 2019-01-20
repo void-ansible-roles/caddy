@@ -1,0 +1,5 @@
+---
+- name: caddy
+  service:
+    name: caddy
+    state: restarted

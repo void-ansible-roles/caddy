@@ -1,0 +1,31 @@
+#jinja2:lstrip_blocks: True
+{{ site.urls | join(' ') }} {
+  # {{ site.name }}
+  {% if site.root_path is defined %}
+  root {{ site.root_path }}
+  {% endif %}
+  {% if site.tls is defined %}
+  {# Either enable with keys, or disable entirely #}
+  {% if site.tls.enable is defined and not site.tls.enable %}
+  tls off
+  {% elif site.tls.certificate is defined %}
+  tls {{ site.tls.certificate }} {{ site.tls.key }} {
+  {% endif %}
+  {% else %}
+  {# ACME Challenge with the specified hostmaster #}
+  {% endif %}
+  tls {{ caddy.tls_hostmaster }} {
+  {% if site.tls is defined %}
+  {% if site.tls.stapling %}
+    must_staple
+  {% endif %}
+  {% endif %}
+  }
+  {% if site.proxy is defined %}
+  {% for p in site.proxy %}
+  proxy {{ p.from }} {{ p.to }} {
+    transparent
+  }
+  {% endfor %}
+  {% endif %}
+}
