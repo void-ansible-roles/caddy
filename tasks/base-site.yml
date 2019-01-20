@@ -1,4 +1,12 @@
 ---
+- name: Create Logs Directory
+  file:
+    path: /var/log/caddy/{{ site.name}}
+    state: directory
+    owner: caddy
+    group: caddy
+    mode: 0750
+
 - name: Install Site Descriptor
   template:
     src: base-site.j2

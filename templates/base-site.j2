@@ -1,6 +1,9 @@
 #jinja2:lstrip_blocks: True
 {{ site.urls | join(' ') }} {
   # {{ site.name }}
+  log / /var/log/caddy/{{ site.name }}/access.log "{combined}"
+  errors /var/log/caddy/{{ site.name }}/errors.log
+
   {% if site.root_path is defined %}
   root {{ site.root_path }}
   {% endif %}

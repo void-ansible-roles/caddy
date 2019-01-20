@@ -6,10 +6,18 @@
 
 - name: Create Drop-In Directory
   file:
-    state: directory
     path: /etc/caddy/conf.d/
+    state: directory
     owner: root
     group: root
+    mode: 0755
+
+- name: Create logs directory
+  file:
+    path: /var/log/caddy
+    state: directory
+    owner: caddy
+    group: caddy
     mode: 0755
 
 - name: Write Base Config
@@ -32,8 +40,8 @@
   notify:
     - iptables
 
-# - name: Enable Service
-#   service:
-#     name: caddy
-#     state: started
-#     enabled: true
+- name: Enable Service
+  service:
+    name: caddy
+    state: started
+    enabled: true
