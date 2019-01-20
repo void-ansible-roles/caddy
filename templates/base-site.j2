@@ -7,6 +7,9 @@
   {% if site.root_path is defined %}
   root {{ site.root_path }}
   {% endif %}
+  {% if site.autoindex | default(False) %}
+  browse
+  {% endif %}
   {% if site.tls is defined %}
   {# Either enable with keys, or disable entirely #}
   {% if site.tls.enable is defined and not site.tls.enable %}
