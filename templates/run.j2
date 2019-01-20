@@ -1,0 +1,4 @@
+#!/bin/sh
+export CADDYPATH=/var/lib/caddy
+cd /etc/caddy
+exec chpst -o 8192 -u caddy caddy -agree -email {{ caddy.tls_hostmaster }} -log /var/log/caddy/caddy.log

@@ -40,6 +40,16 @@
   notify:
     - iptables
 
+- name: Configure Service
+  template:
+    src: run.j2
+    dest: /etc/sv/caddy/run
+    owner: root
+    group: root
+    mode: 0755
+  notify:
+    - caddy
+
 - name: Enable Service
   service:
     name: caddy
