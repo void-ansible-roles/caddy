@@ -10,6 +10,7 @@
   {% if site.autoindex | default(False) %}
   browse
   {% endif %}
+  gzip
   {% if site.tls is defined %}
   {# Either enable with keys, or disable entirely #}
   {% if site.tls.enable is defined and not site.tls.enable %}
